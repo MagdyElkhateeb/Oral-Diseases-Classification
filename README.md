@@ -44,18 +44,15 @@ The order above is alphabetical and matches the order produced by `image_dataset
 
 ```
 Task/
-|-- Models/
-|   |-- final_cnn.keras
-|   |-- final_EfficientNetB0.keras
-|   |-- final_unfreeze_EfficientNetB0.keras   <- model used by the app
-|   |-- final_ResNet50.keras
-|   `-- final_unfreeze_ResNet50.keras
 |-- Test Images/                              <- one sample image per class
 |-- app.py                                    <- FastAPI web app
+|-- final_unfreeze_EfficientNetB0.keras       <- model used by the app
 |-- oral-diseases-classification.ipynb        <- training and evaluation notebook
 |-- Model_Comparison_Report.pdf               <- comparison of all five models
 `-- README.md
 ```
+
+Only the deployed model (EfficientNetB0 + unfreeze) is included in this repository. The other four models (baseline CNN, EfficientNetB0, ResNet50 and ResNet50 + unfreeze) are not stored here, but they can be re-trained by running the notebook, and their results are summarized in `Model_Comparison_Report.pdf`.
 
 ---
 
@@ -178,13 +175,13 @@ venv\Scripts\activate          # Windows
 pip install tensorflow fastapi uvicorn python-multipart pillow numpy
 ```
 
-Make sure the trained model file is located at:
+Make sure the trained model file is located in the project folder, next to `app.py`:
 
 ```
-Models/final_unfreeze_EfficientNetB0.keras
+final_unfreeze_EfficientNetB0.keras
 ```
 
-The `Models` folder must be next to `app.py`.
+`app.py` must load the model from this path (`final_unfreeze_EfficientNetB0.keras`, without a `Models/` prefix).
 
 ---
 
